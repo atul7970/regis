@@ -1,53 +1,61 @@
-const express =require("express");
+const express = require("express");
 const homeSchema = require("../models/homeSchema");
 const Router = express.Router();
-const userSchema = require('../models/homeSchema');
+const userSchema = require("../models/homeSchema");
 
-Router.get('/',(err,res) => {
-    res.render('register',{title:"Fill Form"})
-})
+Router.get("/", (err, res) => {
+  res.render("register", { title: "Fill Form" });
+});
 
-Router.post('/register',async(req,res) =>{
-    try{
-       const firstname= req.body.firstname;
-       const email= req.body.email;
-       const number= req.body.number;
-       const Year= req.body.Year;
-       const Rollno= req.body.Rollno;
-       const StudentID= req.body.StudentID;
-       const lastname= req.body.lastname;
-       const Branch= req.body.Branch;
-        {
-        const userData = new homeSchema({
-            firstname,
-            lastname,
-            Rollno,
-            StudentID,
-            Branch,
-            Year,
-            number,
-            email,
-        })
-        userData.save(err=>{
-            if(err){
-                console.log(err);
-            }else{
-                res.render("register",{title:"Done"})
-            }
-        })
-
-        const useremail = await homeSchema.findOne({email:email});
-        if(email === useremail.email){
-            res.render('register', { title:'',password:'',email:'Email is already register' })
-        }else{
-            console.log('err');
+Router.post("/register", async (req, res) => {
+  try {
+    const firstname = req.body.firstname;
+    const email = req.body.email;
+    const number = req.body.number;
+    const Year = req.body.Year;
+    const Rollno = req.body.Rollno;
+    const StudentID = req.body.StudentID;
+    const lastname = req.body.lastname;
+    const Branch = req.body.Branch;
+    {
+      const userData = new homeSchema({
+        firstname,
+        lastname,
+        Rollno,
+        StudentID,
+        Branch,
+        Year,
+        number,
+        email,
+      });
+      userData.save((err) => {
+        if (err) {
+          console.log(err);
+        } else {
+          res.status(200).json({
+            success: true,
+            msg: "User registered",
+          });
         }
-        }
+      });
 
-    }catch(error){
-        res.render('register',{title:'something is not field', password:'',email:''})
+      const useremail = await homeSchema.findOne({ email: email });
+      if (email === useremail.email) {
+        res.status(400).json({
+          success: false,
+          msg: "User already exists",
+        });
+      } else {
+        console.log("err");
+      }
     }
-})
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      error,
+    });
+  }
+});
 
 // //login
 
@@ -64,9 +72,7 @@ Router.post('/register',async(req,res) =>{
 //         console.log(err);
 //       }
 
-    
-  
 //     } )
 // })
 
-module.exports =Router;
+module.exports = Router;
