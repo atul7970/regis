@@ -17,7 +17,7 @@ const port =process.env.port || 3000;
 
 app.use('/',home)
 
-app.listen(port)
+
 
 mongoose.connect('mongodb+srv://Registration:2111087@cluster0.wexksa1.mongodb.net/mernstacks?retryWrites=true&w=majority', {
     useNewUrlParser: true,
@@ -25,7 +25,9 @@ mongoose.connect('mongodb+srv://Registration:2111087@cluster0.wexksa1.mongodb.ne
 
     const db =mongoose.connection;
 
-    db.on('error',() =>{console.log(err);})
-    db.once('open',() =>{console.log("connected");})
+    db.on('error',() =>{console.log(error);})
+    db.once('open',() =>{
+        console.log("connected");
+        app.listen(port);})
 app.use(express.static('views'));
 app.use('/images', express.static('images'));
