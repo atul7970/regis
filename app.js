@@ -5,12 +5,14 @@ const bodyParser = require("body-parser");
 const home = require("./routers/home");
 const app = express();
 
+require('dotenv').config();
+
 
 app.use(bodyParser.urlencoded({ extended: false }))
 
 app.use(bodyParser.json())
 
-const port = 4000;
+const port = process.env.PORT || 5000;
 
 app.use('/',home)
 
