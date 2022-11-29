@@ -3,7 +3,7 @@ const homeSchema = require("../models/homeSchema");
 const Router = express.Router();
 const userSchema = require("../models/homeSchema");
 
-Router.get("/",async (req,res)=>{
+Router.get("/", async (req, res) => {
   try {
     return res.status(200).send("Welcome to Home Screen");
   } catch (error) {
@@ -11,7 +11,7 @@ Router.get("/",async (req,res)=>{
   }
 });
 
-Router.post("/register", async (req, res) => {
+Router.post("/Register", async (req, res) => {
   try {
     const firstname = req.body.firstname;
     const email = req.body.email;
