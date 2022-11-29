@@ -12,6 +12,7 @@ Router.get("/", async (req, res) => {
 });
 
 Router.post("/register", async (req, res) => {
+  console.log("server responded");
   try {
     const firstname = req.body.firstname;
     const email = req.body.email;
@@ -30,7 +31,7 @@ Router.post("/register", async (req, res) => {
         Branch,
         Year,
         number,
-        email,
+        email
       });
       userData.save((err) => {
         if (err) {
@@ -56,7 +57,7 @@ Router.post("/register", async (req, res) => {
   } catch (error) {
     res.status(400).json({
       success: false,
-      error,
+      error:"error contacting server",
     });
   }
 });

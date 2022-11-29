@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 
 app.use(bodyParser.json())
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 4000;
 
 app.use('/',home)
 
