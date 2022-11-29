@@ -11,7 +11,7 @@ Router.get("/", async (req, res) => {
   }
 });
 
-Router.post("/Register", async (req, res) => {
+Router.post("/register", async (req, res) => {
   try {
     const firstname = req.body.firstname;
     const email = req.body.email;
